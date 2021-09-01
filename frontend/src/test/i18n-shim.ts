@@ -31,4 +31,6 @@ export class I18nShim implements GlobalI18n {
   public strftime = _.identity;
 
   public toHumanSize = _.identity;
+
+  public toTime = _.identity;
 }
