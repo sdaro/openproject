@@ -78,13 +78,13 @@ module MailNotificationHelper
   def timestamp_text(user, journal, extended)
     value = journal.initial? ? "created" : "updated"
     if extended
-      raw(I18n.t(:"mail.notifications.work_packages.#{value}") +
+      raw(I18n.t(:"mail.notification.work_packages.#{value}") +
             ' ' +
-            I18n.t(:"mail.notifications.work_packages.#{value}_at",
+            I18n.t(:"mail.notification.work_packages.#{value}_at",
                    user: user,
                    timestamp: time_ago_in_words(journal.created_at)))
     else
-      raw(I18n.t(:"mail.notifications.work_packages.#{value}_at",
+      raw(I18n.t(:"mail.notification.work_packages.#{value}_at",
                  user: user,
                  timestamp: time_ago_in_words(journal.created_at)))
     end

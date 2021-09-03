@@ -30,7 +30,7 @@
         <%=  ' - ' unless unique_reasons.length === 1 && unique_reasons.first.nil? %>
         <% unique_reasons.each_with_index do |reason, index| %>
           <%= I18n.t(
-                :"mail.notifications.work_packages.reason.#{reason || :unknown}",
+                :"mail.notification.work_packages.reason.#{reason || :unknown}",
                 default: '') %><%= ', ' unless unique_reasons.size-1 == index  %>
         <% end %>
       </td>

@@ -40,7 +40,7 @@ module MailDigestHelper
     if notification.journal.notes.match(/<mention.*data-type=\"user\".*>/)
       I18n.t(:'mail.notification.mentioned').html_safe
     else
-      I18n.t(:'mail.notifications.work_packages.comment_added').html_safe
+      I18n.t(:'mail.notification.work_packages.comment_added').html_safe
     end
   end
 end
