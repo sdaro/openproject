@@ -30,45 +30,17 @@
 
 module MailDigestHelper
   def digest_summary_text(notification_count, wp_count)
-    date = Time.parse(Setting.notification_email_digest_time)
-
-    I18n.t(:'mail.digests.time_frame',
-           time: Setting.notification_email_digest_time,
-           weekday: day_name(date.wday),
-           date: ::I18n.l(date.to_date, format: :long),
+    I18n.t(:'mail.digests.summary',
            number_unread: notification_count,
            number_work_packages: wp_count)
   end
 
-  def digest_notification_timestamp_text(notification, html: true, extended_text: false)
-    journal = notification.journal
-    user = html ? link_to_user(journal.user, only_path: false) : journal.user.name
-
-    timestamp_text(user, journal, extended_text)
-  end
-
   def digest_comment_text(notification)
+    # Todo: Improve check
     if notification.journal.notes.match(/<mention.*data-type=\"user\".*>/)
-      I18n.t(:'mail.digests.work_packages.mentioned').html_safe
+      I18n.t(:'mail.notification.mentioned').html_safe
     else
-      I18n.t(:'mail.digests.work_packages.comment_added').html_safe
-    end
-  end
-
-  private
-
-  def timestamp_text(user, journal, extended)
-    value = journal.initial? ? "created" : "updated"
-    if extended
-      raw(I18n.t(:"mail.digests.work_packages.#{value}") +
-            ' ' +
-            I18n.t(:"mail.digests.work_packages.#{value}_at",
-                   user: user,
-                   timestamp: time_ago_in_words(journal.created_at)))
-    else
-      raw(I18n.t(:"mail.digests.work_packages.#{value}_at",
-                 user: user,
-                 timestamp: time_ago_in_words(journal.created_at)))
+      I18n.t(:'mail.notifications.work_packages.comment_added').html_safe
     end
   end
 end

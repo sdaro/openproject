@@ -27,11 +27,10 @@
       <td style="padding-left: 5px;
         color: #878787;
         white-space: nowrap;">
-        <% unique_reasons = unique_reasons_of_notifications(notifications_by_work_package) %>
         <%=  ' - ' unless unique_reasons.length === 1 && unique_reasons.first.nil? %>
         <% unique_reasons.each_with_index do |reason, index| %>
           <%= I18n.t(
-                :"mail.digests.work_packages.reason.#{reason || :unknown}",
+                :"mail.notifications.work_packages.reason.#{reason || :unknown}",
                 default: '') %><%= ', ' unless unique_reasons.size-1 == index  %>
         <% end %>
       </td>
@@ -41,7 +40,7 @@
             border-radius: 8px;
             padding: 2px 7px;
             font-size: 10px;">
-           <%= notifications_by_work_package.length %>
+           <%= badge_count %>
           </span>
       </td>
     </tr>

@@ -1959,13 +1959,19 @@ en:
   mail:
     actions: 'Actions'
     digests:
-      time_frame: "At %{time} on %{weekday}, %{date}, you have %{number_unread} unread notifications in %{number_work_packages} work packages"
+      summary: 'you have %{number_unread} unread notifications in %{number_work_packages} work packages'
+      subject: 'Daily project summary for %{date} - %{number} updates'
+    logo_alt_text: 'OpenProject Logo'
+    notification:
+      center: 'Notification center'
+      mentioned: 'You have been <b>mentioned in a comment</b>'
+      settings: 'Change email settings'
+      time_frame: "At %{time} on %{weekday}, %{date},"
       work_packages:
         comment_added: '<b>Comment</b> added'
         created: 'Created'
         created_at: '%{timestamp} ago by %{user} '
         login_to_see_all: 'Log in to see all notifications.'
-        mentioned: 'You have been <b>mentioned in a comment</b>'
         more_to_see_singular: 'There is 1 more work package with notifications.'
         more_to_see_plural: 'There are %{number} more work packages with notifications.'
         reason:
@@ -1975,13 +1981,8 @@ en:
           subscribed: 'all'
           prefix: 'Received because of the notification setting: %{reason}'
         see_all: 'See all'
-        subject: 'Daily project summary for %{date} - %{number} updates'
         updated: 'Updated'
         updated_at: '%{timestamp} ago by %{user}'
-    logo_alt_text: 'OpenProject Logo'
-    notification:
-      center: 'Notification center'
-      settings: 'Change email settings'
     salutation: 'Hey %{user}!'
 
   mail_body_account_activation_request: "A new user (%{value}) has registered. The account is pending your approval:"

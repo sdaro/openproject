@@ -80,7 +80,7 @@ describe DigestMailer, type: :mailer do
 
     it 'notes the day and the number of notifications in the subject' do
       expect(mail.subject)
-        .to eql I18n.t('mail.digests.work_packages.subject',
+        .to eql I18n.t('mail.digests.subject',
                        date: format_time_as_date(Time.current),
                        number: 1)
     end

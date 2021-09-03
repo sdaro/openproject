@@ -36,6 +36,23 @@ module MailNotificationHelper
     image_tag attachments[image].url, **options
   end
 
+  def summary_time_frame_text
+    # Todo make time configurable for the mentioned mail
+    date = Time.parse(Setting.notification_email_digest_time)
+
+    I18n.t(:'mail.notification.time_frame',
+           time: Setting.notification_email_digest_time,
+           weekday: day_name(date.wday),
+           date: ::I18n.l(date.to_date, format: :long))
+  end
+
+  def notification_timestamp_text(journal, html: true, extended_text: false)
+    user = html ? link_to_user(journal.user, only_path: false) : journal.user.name
+
+    timestamp_text(user, journal, extended_text)
+  end
+
+
   def unique_reasons_of_notifications(notifications)
     notifications
       .map(&:reason_mail_digest)
@@ -54,5 +71,22 @@ module MailNotificationHelper
   def status_colors(status)
     color_id = selected_color(status)
     Color.find(color_id).color_styles.map { |k, v| "#{k}:#{v};" }.join(' ') if color_id
+  end
+
+  private
+
+  def timestamp_text(user, journal, extended)
+    value = journal.initial? ? "created" : "updated"
+    if extended
+      raw(I18n.t(:"mail.notifications.work_packages.#{value}") +
+            ' ' +
+            I18n.t(:"mail.notifications.work_packages.#{value}_at",
+                   user: user,
+                   timestamp: time_ago_in_words(journal.created_at)))
+    else
+      raw(I18n.t(:"mail.notifications.work_packages.#{value}_at",
+                 user: user,
+                 timestamp: time_ago_in_words(journal.created_at)))
+    end
   end
 end
